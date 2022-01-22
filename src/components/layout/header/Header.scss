@@ -1,0 +1,110 @@
+.Header {
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.Header .Header_top {
+  width: 100vw;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-primary-v1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.342);
+  &_btn-menu {
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 18px;
+    color: var(--color-black);
+  }
+}
+
+.Header .Header_menu {
+  padding: 20px 15px;
+  background: var(--color-primary-v2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.342);
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &_link {
+    text-decoration: none;
+    color: var(--color-black);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+}
+
+.Header .Header_menu_submenu {
+  &_btn {
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+  }
+  ul{
+    padding-left: 10px;
+    padding-top: 10px;
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .Header {
+    display: flex;
+    background: var(--color-primary-v1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.342);
+  }
+  .Header .Header_top {
+    width: auto !important;
+    box-shadow: none;
+    &_btn-menu {
+      display: none;
+    }
+  }
+  .Header .Header_menu {
+    padding: 0;
+    display: flex !important;
+    box-shadow: none;
+    ul {
+      align-items: center;
+      flex-direction: row;
+      gap: 0;
+    }
+    &_link.desktop {
+      padding: 20px 15px;
+      padding-top: 20px;
+      &:hover {
+        background: var(--color-primary);
+      }
+    }
+  }
+  .Header .Header_menu_submenu {
+    position: relative;
+    ul {
+      display: none;
+      padding: 20px 15px;
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      background: var(--color-primary-v2);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.342);
+    }
+    &_btn {
+      padding: 20px 15px;
+      &:hover {
+        background: var(--color-primary);
+      }
+    }
+  }
+}
