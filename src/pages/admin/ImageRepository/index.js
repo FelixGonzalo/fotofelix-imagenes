@@ -1,4 +1,5 @@
 import React from 'react'
+import './ImageRepository.scss'
 import logo from '../../../assets/fotofelix_logo.png';
 
 const ImageRepository = () => {

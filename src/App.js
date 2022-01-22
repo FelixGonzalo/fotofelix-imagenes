@@ -4,10 +4,11 @@ import {
   Routes,
   Route
 } from "react-router-dom"
-import './App.scss';
-import ImageRepository from './pages/admin/ImageRepository';
-import Layout from './pages/admin/Layout';
+import './styles/global.scss';
 import Home from './pages/home';
+import Layout from './pages/admin/Layout';
+import ImageRepository from './pages/admin/ImageRepository';
+import CategoryDashboard from './pages/admin/CategoryDashboard';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/admin/" element={<Layout />} >
           <Route index element={<div>Administración</div>} />
           <Route path="repositorio" element={<ImageRepository />} />
+          <Route path="dashboard-de-categorias" element={<CategoryDashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>
