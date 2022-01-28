@@ -46,7 +46,10 @@ const Header = () => {
               <li>
                 <Link to="/admin/repositorio" className="Header_menu_link" onClick={handleCloseAllMenu}>Repositorio</Link>
               </li>
-               <li>
+              <li>
+                <Link to="/admin/dashboard-de-clientes" className="Header_menu_link" onClick={handleCloseAllMenu}>Editar clientes</Link>
+              </li>
+              <li>
                 <Link to="/admin/dashboard-de-categorias" className="Header_menu_link" onClick={handleCloseAllMenu}>Editar categorías</Link>
               </li>
             </ul>
