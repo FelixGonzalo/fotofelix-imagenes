@@ -1,16 +1,16 @@
 import {API_URL} from '../settings'
 
-export default async function deleteCategory (id) {
+export default async function getFiles () {
   try {
-    const res = await fetch( `${API_URL}/categories/${id}`, {
-      method: 'DELETE',
+    const res = await fetch(`${API_URL}/images`, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     });
     const data = await res.json();
-    if (!res.ok) throw new Error('Response is NOT ok')
-    return data;
+    if (Array.isArray(data)) return data
+    return []
   } catch (error) {
     console.log('service error', error)
     throw new Error(error)

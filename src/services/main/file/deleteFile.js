@@ -1,8 +1,8 @@
 import {API_URL} from '../settings'
 
-export default async function deleteCategory (id) {
+export default async function deleteFile (id) {
   try {
-    const res = await fetch( `${API_URL}/categories/${id}`, {
+    const res = await fetch(`${API_URL}/images/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

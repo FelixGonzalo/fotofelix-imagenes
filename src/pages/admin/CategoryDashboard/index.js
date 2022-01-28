@@ -15,7 +15,7 @@ const CategoryDashboard = () => {
     error: null,
     modal: false,
     categories: [],
-    form: {
+    createForm: {
       name: ''
     },
     editForm: {
@@ -40,23 +40,23 @@ const CategoryDashboard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleSubmit = async (e) => {
+  const handleCreate = async (e) => {
     e.preventDefault()
     setState({ ...state, loading: true, error: null })
-    addCategory(state.form)
+    addCategory(state.createForm)
       .then(data => setState({
         ...state,
         loading: false,
-        form: {name: ''},
+        createForm: {name: ''},
         categories: [...state.categories, data]}))
       .catch(error => setState({ ...state, loading: false, error: error}))
   }
 
-  const handleChange = e => {
+  const handleChangeCreate = e => {
     setState({
       ...state,
-      form: {
-        ...state.form,
+      createForm: {
+        ...state.createForm,
         [e.target.name]: e.target.value,
       },
     })
@@ -108,9 +108,9 @@ const CategoryDashboard = () => {
   return <main>
     <h2>Editar categorías</h2>
     <CategoryForm
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-      formValues={state.form}/>
+      onChange={handleChangeCreate}
+      onSubmit={handleCreate}
+      formValues={state.createForm}/>
     <ListCategories
       categories={state.categories}
       onDelete={handleDelete}
