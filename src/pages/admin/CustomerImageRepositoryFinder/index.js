@@ -33,7 +33,8 @@ const CustomerImageRepositoryFinder = () => {
 
   const handleFilter = (e) => {
     e.preventDefault()
-
+    if (!state.filterForm.firstname.trim() && !state.filterForm.phone.trim()) return
+    if (state.filterForm.phone.length !== 9 && !state.filterForm.firstname.trim()) return
     setState({ ...state, loading: true, error: null })
     getCustomersByFilter(state.filterForm)
       .then(data => { setState({ ...state, loading: false, customers: data }) })

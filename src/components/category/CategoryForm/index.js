@@ -7,6 +7,7 @@ const CategoryForm = (props) => {
         type="text"
         name="name"
         id="name"
+        maxlength="40"
         className="input-default"
         placeholder="Nombre de la categoría"
         onChange={props.onChange}

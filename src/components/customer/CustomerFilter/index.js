@@ -7,6 +7,7 @@ const CustomerFilter = (props) => {
         type="text"
         name="firstname"
         id="firstname"
+        maxlength="60"
         className="input-default"
         placeholder="Nombre del cliente"
         onChange={props.onChange}
@@ -15,6 +16,7 @@ const CustomerFilter = (props) => {
         type="text"
         name="phone"
         id="phone"
+        maxlength="9"
         className="input-default"
         placeholder="Celular del cliente"
         onChange={props.onChange}

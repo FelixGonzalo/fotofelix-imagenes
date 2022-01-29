@@ -7,10 +7,14 @@ import getCategories from '../../../services/main/category/getCategories'
 import addCategory from '../../../services/main/category/addCategory'
 import deleteCategory from '../../../services/main/category/deleteCategory'
 import editCategory from '../../../services/main/category/editCategory'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import './CategoryDashboard.scss'
 
 
 const CategoryDashboard = () => {
+
+  const MySwal = withReactContent(Swal)
 
   const [state, setState] = React.useState({
     loading: false,
@@ -44,6 +48,7 @@ const CategoryDashboard = () => {
 
   const handleCreate = async (e) => {
     e.preventDefault()
+    if (!state.createForm.name.trim()) return
     setState({ ...state, loading: true, error: null })
     addCategory(state.createForm)
       .then(data => setState({
@@ -51,7 +56,14 @@ const CategoryDashboard = () => {
         loading: false,
         createForm: {name: ''},
         categories: [...state.categories, data]}))
-      .catch(error => setState({ ...state, loading: false, error: error}))
+      .catch(error => {
+        setState({ ...state, loading: false, error: error})
+        MySwal.fire({
+          title: <strong>Error al guardar</strong>,
+          text: 'Compruebe el nombre de la categoría y vuelva a intentarlo',
+          icon: 'error'
+        })
+      })
   }
 
   const handleChangeCreate = e => {
@@ -74,11 +86,17 @@ const CategoryDashboard = () => {
       }))
       .catch(error => {
         setState({ ...state, loading: false, error: error})
+        MySwal.fire({
+          title: <strong>Error al eliminar</strong>,
+          text: 'Compruebe que la categoría no se utiliza y vuelva a intentarlo',
+          icon: 'error'
+        })
       })
   }
 
   const handleEdit = async (e) => {
     e.preventDefault()
+    if (!state.editForm.name.trim()) return
     setState({ ...state, loading: true, error: null })
     editCategory(state.editForm)
       .then(data => setState({
@@ -91,7 +109,14 @@ const CategoryDashboard = () => {
           return category
         })
       }))
-      .catch(error => setState({ ...state, loading: false, error: error}))
+      .catch(error => {
+        setState({ ...state, loading: false, error: error})
+        MySwal.fire({
+          title: <strong>Error al guardar</strong>,
+          text: 'Compruebe el nombre de la categoría y vuelva a intentarlo',
+          icon: 'error'
+        })
+      })
   }
 
   const handleChangeEdit = e => {
