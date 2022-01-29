@@ -126,7 +126,7 @@ const CustomerDashboard = () => {
   }
 
   return <main>
-    <h2>Editar clientes</h2>
+    <h1>Editar clientes</h1>
     <CustomerForm
       onChange={handleChangeCreate}
       onSubmit={handleCreate}

@@ -1,0 +1,47 @@
+
+.CustomerImageRepositoryFinder .CustomerFilter {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.CustomerImageRepositoryFinder .ListCustomers {
+  width: 100%;
+  padding: 0;
+  margin: 40px auto;
+  list-style: none;
+  li {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  p {
+    margin: 0;
+    font-weight: bold;
+    text-align: left;
+    text-transform: capitalize;
+  }
+  span {
+    font-weight: normal;
+    font-size: 13px;
+    display: block;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .CustomerImageRepositoryFinder .CustomerFilter {
+    flex-direction: row;
+    max-width: auto;
+    input:nth-child(1) {
+      min-width: 346px;
+    }
+  }
+  .CustomerImageRepositoryFinder .ListCustomers {
+    max-width: 673px;
+  }
+}

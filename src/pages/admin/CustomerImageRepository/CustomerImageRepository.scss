@@ -1,0 +1,58 @@
+.CustomerImageRepository {
+  padding-bottom: 40px;
+  &_customerInformation {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fff;
+    list-style: none;
+    border-radius: 5px;
+    &_title {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    &_buttons {
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      outline: none;
+      border: 1px solid var(--color-black);
+      background: none;
+      border-radius: 5px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover {
+        background: var(--color-black);
+        color: #fff;
+      }
+    }
+    li i {
+      text-align: center;
+      width: 25px;
+    }
+  }
+}
+
+.CustomerImageRepository {
+  &_listImages {
+    min-height: 200px;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .CustomerImageRepository_info {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  .CustomerImageRepository_listImages {
+    width: 100%;
+    text-align: center;
+  }
+}

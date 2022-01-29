@@ -1,12 +1,14 @@
 import React from 'react';
 import LoadingPage from '../../../components/loaders/LoadingPage';
+import Modal from '../../../components/modals/Modal';
 import ListCategories from '../../../components/category/ListCategories';
 import CategoryForm from '../../../components/category/CategoryForm'
 import getCategories from '../../../services/main/category/getCategories'
 import addCategory from '../../../services/main/category/addCategory'
 import deleteCategory from '../../../services/main/category/deleteCategory'
 import editCategory from '../../../services/main/category/editCategory'
-import Modal from '../../../components/modals/Modal';
+import './CategoryDashboard.scss'
+
 
 const CategoryDashboard = () => {
 
@@ -70,7 +72,9 @@ const CategoryDashboard = () => {
         loading: false,
         categories: state.categories.filter(category => category.id !== data.id)
       }))
-      .catch(error => setState({ ...state, loading: false, error: error}))
+      .catch(error => {
+        setState({ ...state, loading: false, error: error})
+      })
   }
 
   const handleEdit = async (e) => {
@@ -105,8 +109,8 @@ const CategoryDashboard = () => {
     setState({...state, modal: !state.modal, editForm: category})
   }
 
-  return <main>
-    <h2>Editar categorías</h2>
+  return <main className="wrapper CategoryDashboard">
+    <h1 className="title-default">Editar categorías</h1>
     <CategoryForm
       onChange={handleChangeCreate}
       onSubmit={handleCreate}

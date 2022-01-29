@@ -7,8 +7,6 @@
   --color-background: rgb(243, 243, 243);
 }
 
-$color_1: black;
-
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -31,3 +29,23 @@ body, button, input, label, select {
   sans-serif;
   font-size: 16px;
 }
+
+.title-default {
+  margin-bottom: 40px;
+  font-weight: normal;
+  text-align: center;
+}
+
+.wrapper {
+  padding: 20px;
+}
+
+@media screen and (min-width: 1024px) {
+  .wrapper {
+    padding: 20px 30px;
+  }
+
+}
+
+@import './buttons.scss';
+@import './inputs.scss';

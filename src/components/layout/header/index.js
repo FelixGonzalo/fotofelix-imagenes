@@ -10,14 +10,8 @@ const Header = () => {
     Header_menu.style.display = Header_menu.style.display === 'none' ? 'block' : 'none'; //
   }
 
-  const handleSwitchSubMenu = () => {
-    const Header_menu = document.getElementById('Header_submenu_admin')
-    Header_menu.style.display = Header_menu.style.display === 'none' ? 'flex' : 'none'; //
-  }
-
   const handleCloseAllMenu = () => {
     document.getElementById('Header_menu').style.display ='none';
-    document.getElementById('Header_submenu_admin').style.display ='none';
   }
 
   return (
@@ -30,29 +24,13 @@ const Header = () => {
           <i className="fas fa-bars"></i>
         </button>
       </div>
-      <nav id="Header_menu" className="Header_menu">
+      <nav id="Header_menu" className="Header_menu" style={{display: "none"}}>
         <ul>
           <li>
-            <Link to="/" className="Header_menu_link desktop" onClick={handleCloseAllMenu}>Inicio</Link>
+            <Link to="/admin/buscador-de-repositorios" className="Header_menu_link" onClick={handleCloseAllMenu}>Repositorio de imágenes</Link>
           </li>
-          <li className="Header_menu_submenu">
-            <button
-              type="button"
-              className="Header_menu_submenu_btn"
-              onClick={handleSwitchSubMenu}>
-                Admin <i className="fas fa-caret-down"></i>
-            </button>
-            <ul id="Header_submenu_admin">
-              <li>
-                <Link to="/admin/repositorio" className="Header_menu_link" onClick={handleCloseAllMenu}>Repositorio</Link>
-              </li>
-              <li>
-                <Link to="/admin/dashboard-de-clientes" className="Header_menu_link" onClick={handleCloseAllMenu}>Editar clientes</Link>
-              </li>
-              <li>
-                <Link to="/admin/dashboard-de-categorias" className="Header_menu_link" onClick={handleCloseAllMenu}>Editar categorías</Link>
-              </li>
-            </ul>
+          <li>
+            <Link to="/admin/dashboard-de-categorias" className="Header_menu_link" onClick={handleCloseAllMenu}>Editar categorías</Link>
           </li>
         </ul>
       </nav>
