@@ -32,6 +32,15 @@
   }
 }
 
+.CustomerImageRepositoryFinder_buttons {
+  width: 100%;
+  max-width: 670px;
+  margin: 20px auto 0;
+  text-align: right;
+  button {
+    font-size: 11px;
+  }
+}
 
 @media screen and (min-width: 768px) {
   .CustomerImageRepositoryFinder .CustomerFilter {

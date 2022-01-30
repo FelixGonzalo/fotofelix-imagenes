@@ -156,8 +156,8 @@ const CustomerImageRepository = () => {
         loading: false,
         modalAddImage:false,
         addImageForm: {
+          ...state.addImageForm,
           categoryId: '',
-          clientId: '',
           imgfile: null,
           imgUrl: '',
         },
