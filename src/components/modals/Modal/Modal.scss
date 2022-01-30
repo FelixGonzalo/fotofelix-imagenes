@@ -1,5 +1,5 @@
 .Modal {
-  padding: 8px;
+  padding: 8px 8px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,14 +9,15 @@
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
 }
 
 .Modal__container {
   width: 100%;
   max-width: 400px;
+  margin-top: 5rem;
   padding: 20px;
   position: relative;
-  top: 10rem;
   border-radius: 5px;
   background-color: #ffffff;
 }

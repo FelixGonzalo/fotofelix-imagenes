@@ -1,6 +1,6 @@
 import {API_URL} from '../settings'
 
-export default async function deleteFile (id) {
+export default async function deleteImage (id) {
   try {
     const res = await fetch(`${API_URL}/images/${id}`, {
       method: 'DELETE',

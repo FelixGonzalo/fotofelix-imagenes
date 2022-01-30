@@ -46,3 +46,25 @@
     filter: brightness(1.1);
   }
 }
+
+.btn-icon {
+  border-radius: 100px;
+  background: var(--color-black);
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-icon-delete {
+  &:hover {
+    background: var(--color-secondary);
+  }
+}
+
+.btn-icon-download {
+  padding: 1px 5px;
+  &:hover {
+    background: rgb(1, 84, 186);
+  }
+}

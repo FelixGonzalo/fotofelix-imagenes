@@ -19,7 +19,7 @@ export default async function getImages () {
 
 export async function getImagesByCustomerId (customerId) {
   try {
-    const res = await fetch(`${API_URL}/images/search?clientid=${customerId}`, {
+    const res = await fetch(`${API_URL}/images/search?clientId=${customerId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

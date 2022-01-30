@@ -10,10 +10,14 @@ import {getCustomerById} from '../../../services/main/customer/getCustomers'
 import editCustomer from '../../../services/main/customer/editCustomer'
 import getCategories from '../../../services/main/category/getCategories'
 import addImage from '../../../services/main/image/addImage'
+import deleteImage from '../../../services/main/image/deleteImage'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import './CustomerImageRepository.scss'
 
 const CustomerImageRepository = () => {
 
+  const MySwal = withReactContent(Swal)
   const params = useParams();
 
   const [state, setState] = React.useState({
@@ -34,7 +38,7 @@ const CustomerImageRepository = () => {
     addImageForm: {
       categoryId: '',
       clientId: '',
-      imgfile: {},
+      imgfile: null,
       imgUrl: '',
     }
   })
@@ -52,7 +56,7 @@ const CustomerImageRepository = () => {
   function fetchCategories(){
     setState({ ...state, loading: true, error: null })
     getCategories()
-      .then(data => {setState({ ...state, loading: false, categories: data }) })
+      .then(data => {setState({ ...state, loading: false, categories: data, modalAddImage: true }) })
       .catch(error => {
         console.log("Category list error", error)
         setState({ ...state, loading: false, error: error})
@@ -87,6 +91,17 @@ const CustomerImageRepository = () => {
 
   const handleEdit = async (e) => {
     e.preventDefault()
+
+    if (!state.editForm.firstname.trim() || !state.editForm.phone.trim()) return
+
+    if (state.editForm.phone.length !== 9) {
+      MySwal.fire({
+        text: 'El celular debe tener 9 números ',
+        icon: 'info'
+      })
+      return
+    }
+
     setState({ ...state, loading: true, error: null, editForm: state.customer })
     editCustomer(state.editForm)
       .then(data => setState({
@@ -103,7 +118,14 @@ const CustomerImageRepository = () => {
         },
         customer: data
       }))
-      .catch(error => setState({ ...state, loading: false, error: error}))
+      .catch(error => {
+        setState({ ...state, loading: false, error: error})
+        MySwal.fire({
+          title: <strong>Error al guardar</strong>,
+          text: 'Compruebe los datos y vuelva a intentarlo',
+          icon: 'error'
+        })
+      })
   }
 
   const handleChangeEdit = e => {
@@ -123,12 +145,33 @@ const CustomerImageRepository = () => {
 
   const handleAddImage = async (e) => {
     e.preventDefault()
+    if (!state.addImageForm.categoryId.trim()) return
+    if (!state?.addImageForm?.imgfile) return
+
     setState({ ...state, loading: true, error: null })
     addImage(state.addImageForm)
     .then(data => {
-      setState({ ...state, loading: false})
+      setState({
+        ...state,
+        loading: false,
+        modalAddImage:false,
+        addImageForm: {
+          categoryId: '',
+          clientId: '',
+          imgfile: null,
+          imgUrl: '',
+        },
+        images: [ data, ...state.images]
+      })
     })
-    .catch(error => setState({ ...state, loading: false, error: error}))
+    .catch(error => {
+      setState({ ...state, loading: false, error: error})
+       MySwal.fire({
+        title: <strong>Error al guardar</strong>,
+        text: 'Compruebe los datos y vuelva a intentarlo',
+        icon: 'error'
+      })
+    })
   }
 
   const handleChangeAddImage = e => {
@@ -159,6 +202,24 @@ const CustomerImageRepository = () => {
     }
   }
 
+  const handleDeleteImage = (imageId) => {
+     setState({ ...state, loading: true, error: null })
+      deleteImage(imageId)
+        .then(data => setState({
+          ...state,
+          loading: false,
+          images: state.images.filter(image => image.id !== data.id)
+        }))
+        .catch(error => {
+          setState({ ...state, loading: false, error: error})
+          MySwal.fire({
+            title: <strong>Error al eliminar</strong>,
+            text: 'Vuelva a intentarlo',
+            icon: 'error'
+          })
+        })
+  }
+
   return (
     <main className="wrapper CustomerImageRepository">
       <h1 className="title-default">Repositorio de imágenes</h1>
@@ -176,21 +237,23 @@ const CustomerImageRepository = () => {
             <span><i className="fas fa-envelope"></i></span> {state?.customer?.email}
           </li>
           <li className="CustomerImageRepository_customerInformation_buttons">
-            <button onClick={handleSwitchEditModal}><i className="fas fa-user-edit"></i> Editar</button>
-            <button onClick={handleSwitchAddImageModal}><i className="fas fa-plus"></i> Agregar imagen</button>
+            <button onClick={handleSwitchEditModal} className="btn-default"><i className="fas fa-user-edit"></i> Editar</button>
+            <button onClick={handleSwitchAddImageModal} className="btn-default"><i className="fas fa-plus"></i> Agregar imagen</button>
+            <button onClick={() => fetchImagesByCustomerId(state.customer.id)} className="btn-default"><i className="fas fa-images"></i> Mostrar imágenes</button>
           </li>
         </ul>
 
         <section className="CustomerImageRepository_listImages">
           <ListImages
             images={state.images}
+            onDelete={handleDeleteImage}
           />
-          <button className="btn_getImages" onClick={() => fetchImagesByCustomerId(state.customer.id)}>Cargar imágenes</button>
+          {/* <button className="btn_getImages" onClick={() => fetchImagesByCustomerId(state.customer.id)}>Cargar imágenes</button> */}
         </section>
       </section>
 
       <Modal isOpen={state.modal} onClose={handleSwitchEditModal}>
-        <h2>Editar Categoría</h2>
+        <h2>Editar Cliente</h2>
         <CustomerForm
           onChange={handleChangeEdit}
           onSubmit={handleEdit}
