@@ -27,7 +27,7 @@ const Header = () => {
     if (!accessToken) {
       navigate("/");
     }
-  })
+  }, [])
 
   return (
     <header className="Header">
