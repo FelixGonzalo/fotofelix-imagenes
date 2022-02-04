@@ -1,9 +1,11 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './Header.scss'
 import logo from '../../../assets/fotofelix_logo.png';
 
 const Header = () => {
+
+  let navigate = useNavigate();
 
   const handleSwitchMenu = () => {
     const Header_menu = document.getElementById('Header_menu')
@@ -13,6 +15,19 @@ const Header = () => {
   const handleCloseAllMenu = () => {
     document.getElementById('Header_menu').style.display ='none';
   }
+
+  const handleLogout = () => {
+    localStorage.removeItem('accesToken');
+    document.getElementById('Header_menu').style.display ='none';
+    navigate("/");
+  }
+
+  React.useEffect(() => {
+    const accessToken = localStorage.getItem('accesToken')
+    if (!accessToken) {
+      navigate("/");
+    }
+  })
 
   return (
     <header className="Header">
@@ -31,6 +46,10 @@ const Header = () => {
           </li>
           <li>
             <Link to="/admin/dashboard-de-categorias" className="Header_menu_link" onClick={handleCloseAllMenu}>Editar categorías</Link>
+          </li>
+          <li className="btn-logout">
+            <button className="Header_menu_link btn-default" onClick={handleLogout}>Cerrar Sesión</button>
+            {/* <Link to="/admin/dashboard-de-categorias" className="Header_menu_link" onClick={handleCloseAllMenu}>Editar categorías</Link> */}
           </li>
         </ul>
       </nav>

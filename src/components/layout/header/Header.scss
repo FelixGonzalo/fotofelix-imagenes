@@ -41,6 +41,12 @@
   }
 }
 
+.btn-logout {
+  button {
+    margin-top: 10px;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .Header {
     display: flex;
@@ -56,11 +62,13 @@
     }
   }
   .Header .Header_menu {
+    width: 100%;
     padding: 0;
     display: flex !important;
     box-shadow: none;
     background: none;
     ul {
+      width: 100%;
       align-items: center;
       flex-direction: row;
       gap: 20px;
@@ -69,6 +77,13 @@
       &:hover {
         color: var(--color-secondary);
       }
+    }
+  }
+  .btn-logout {
+    margin-left: auto;
+    margin-right: 20px;
+    button {
+      margin-top: 0;
     }
   }
 }

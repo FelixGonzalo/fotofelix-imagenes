@@ -2,10 +2,12 @@ import {API_URL} from '../settings'
 
 export default async function getImages () {
   try {
+    const accesToken = localStorage.getItem('accesToken')
     const res = await fetch(`${API_URL}/images`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accesToken}`
       }
     });
     const data = await res.json();
@@ -19,10 +21,12 @@ export default async function getImages () {
 
 export async function getImagesByCustomerId (customerId) {
   try {
+    const accesToken = localStorage.getItem('accesToken')
     const res = await fetch(`${API_URL}/images/search?clientId=${customerId}`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accesToken}`
       }
     });
     const data = await res.json();

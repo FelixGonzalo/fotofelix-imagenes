@@ -2,10 +2,12 @@ import {API_URL} from '../settings'
 
 export default async function addCategory (formData) {
   try {
+    const accesToken = localStorage.getItem('accesToken')
     const res = await fetch( `${API_URL}/categories`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accesToken}`
       },
       body:  JSON.stringify({
         name: formData.name

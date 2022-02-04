@@ -2,27 +2,32 @@ import {API_URL} from '../settings'
 
 export default async function addImage (formData) {
   try {
-    console.log("addImageWithFile iniciando", formData)
-
+    const accesToken = localStorage.getItem('accesToken')
+    // console.log("addImageWithFile iniciando", formData)
     // add file
     var myFormData = new FormData();
     myFormData.append("file", formData.imgfile);
     const res = await fetch(`${API_URL}/files/upload`, {
       method: 'POST',
-      body: myFormData
+      body: myFormData,
+      headers: {
+        'Authorization': `Bearer ${accesToken}`
+      }
     });
     const data = await res.json();
-    if (!res.ok && data.data.file.length < 2) throw new Error('Response is NOT ok')
+    // console.log("respuesta 1", data)
+    if (!res.ok && data?.data?.file?.length < 2) throw new Error('Response is NOT ok')
 
     const imgResult = await data.data.file
 
     // add image with result
-    console.log("addImageWithFile iniciando paso 2", formData)
+    // console.log("addImageWithFile iniciando paso 2", formData)
 
     const resTwo = await fetch(`${API_URL}/images`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accesToken}`
       },
       body:  JSON.stringify({
         imgUrl: imgResult,

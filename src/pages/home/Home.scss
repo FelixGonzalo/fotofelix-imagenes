@@ -9,7 +9,12 @@
     width: 150px;
   }
   &_title {
+    margin-bottom: 25px;
     font-size: 25px;
     font-weight: normal;
+  }
+  button {
+    margin-top: 10px;
+    margin-bottom: 40px
   }
 }

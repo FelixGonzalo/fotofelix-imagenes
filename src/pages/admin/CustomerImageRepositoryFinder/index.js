@@ -89,6 +89,7 @@ const CustomerImageRepositoryFinder = () => {
     .then(data => setState({
       ...state,
       loading: false,
+      modalCreateCustomer: false,
       createCustomerForm: {
         firstname: '',
         lastname: '',

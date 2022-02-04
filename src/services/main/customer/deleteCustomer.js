@@ -2,10 +2,12 @@ import {API_URL} from '../settings'
 
 export default async function deleteCustomer (id) {
   try {
+    const accesToken = localStorage.getItem('accesToken')
     const res = await fetch( `${API_URL}/clients/${id}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accesToken}`
       }
     });
     const data = await res.json();
