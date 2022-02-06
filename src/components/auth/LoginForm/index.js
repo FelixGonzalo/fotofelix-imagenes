@@ -13,7 +13,7 @@ const LoginForm = (props) => {
         onChange={props.onChange}
         value={props.formValues.user || ""}/>
       <input
-        type="text"
+        type="password"
         name="password"
         id="password"
         maxLength="40"
